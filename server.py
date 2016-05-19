@@ -1,3 +1,4 @@
+import pickle
 import tornado.ioloop
 import tornado.web
 import os
@@ -13,6 +14,13 @@ class GetTrack(tornado.web.RequestHandler):
         print("test.html")
         self.finish()
 
+class GetTestTracks(tornado.web.RequestHandler):
+    def get(self):
+        print("testTracks")
+        with open("./resPickle.pickle", "rb") as f:
+            res = pickle.load(f)
+        print(res)
+        self.finish(res)
 
 settings = dict(
     static_path=os.path.join(os.path.dirname(__file__), "static")
@@ -24,6 +32,7 @@ def make_app():
     return tornado.web.Application([
         (r"/", MainHandler),
         (r"/track", GetTrack),
+        (r"/test", GetTestTracks),
     ], **settings)
 
 
