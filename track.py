@@ -14,8 +14,8 @@ COOR = "{0},{1}"
 LAT = 0
 LONG = 1
 INCLINE_EASY_OPT = 0
-INCLINE_MEDIUM_OPT = 3
-INCLINE_HARD_OPT = 6
+INCLINE_MEDIUM_OPT = 7.5
+INCLINE_HARD_OPT = 10
 
 def closestTracks(tracks, userPrefs):
     tracksInRange = []
@@ -26,11 +26,11 @@ def closestTracks(tracks, userPrefs):
     for track in tracksInRange:
         grade = 0
         if userPrefs['incline'] == 1:
-            grade = abs(track.meanIncline - INCLINE_EASY_OPT)
+            grade = abs(track.maxIncline - INCLINE_EASY_OPT)
         if userPrefs['incline'] == 2:
-            grade = abs(track.meanIncline - INCLINE_MEDIUM_OPT)
+            grade = abs(track.maxIncline - INCLINE_MEDIUM_OPT)
         if userPrefs['incline'] == 3:
-            grade = abs(track.meanIncline - INCLINE_HARD_OPT)
+            grade = abs(track.maxIncline - INCLINE_HARD_OPT)
         if userPrefs['facilities']:
             if track.hasFacilities:
                 grade -= 2
@@ -59,7 +59,14 @@ def closestTracks(tracks, userPrefs):
 def createJsonResponse(tracks):
     data = {"results": []}
     for track in tracks:
-        data['results'].append({'incline': track.meanIncline, 'dist': track.dist, 'facilities': track.hasFacilities,
+        inc = 0
+        if track.maxIncline <= INCLINE_MEDIUM_OPT:
+            inc = 1
+        elif track.maxIncline <= INCLINE_HARD_OPT:
+            inc = 2
+        else:
+            inc = 3
+        data['results'].append({'incline': inc, 'dist': track.dist, 'facilities': track.hasFacilities,
                                 'water': track.hasWater, 'stairs': track.hasStairs})
     json_data = json.dumps(data)
     return json_data
