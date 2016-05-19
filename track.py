@@ -46,6 +46,12 @@ def closestTracks(tracks, userPrefs):
                 grade -= 2
             else:
                 grade += 2
+        minDistance = 10
+        for point in track.points:
+            cur_dist = abs(vincenty(point, (userPrefs['lat'],userPrefs['long'])).km)
+            if (cur_dist < minDistance):
+                minDistance = cur_dist
+        grade += math.sqrt(minDistance)
         grades.append(grade)
     closestTracks = []
     for i in range(3):
@@ -101,6 +107,7 @@ class Track:
     hasStairs = False
 
     def __init__(self, listOfCoordinates):
+        self.points = listOfCoordinates
         elevations = get_elevations(listOfCoordinates)
         for location in range(1, len(listOfCoordinates)):
             cur_dist = abs(vincenty(listOfCoordinates[location-1], listOfCoordinates[location]).km)
