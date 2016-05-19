@@ -26,7 +26,7 @@ for j, i in enumerate(paths):
     print(t.meanIncline)
     tracks.append(t)
 
-userPrefs = {"dist": 3.25, "facilities": True, "water": False, "incline": 2, "stairs": False}
+userPrefs = {"dist": 3.25, "facilities": True, "water": False, "incline": 1, "stairs": False}
 
 res = track.closestTracks(tracks, userPrefs)
 

@@ -20,7 +20,7 @@ INCLINE_HARD_OPT = 6
 def closestTracks(tracks, userPrefs):
     tracksInRange = []
     for track in tracks:
-        if (track.dist <= userPrefs['dist']+500) and (track.dist >= userPrefs['dist']-500):
+        if (track.dist <= userPrefs['dist']+0.5) and (track.dist >= userPrefs['dist']-0.5):
             tracksInRange.append(track)
     grades = []
     for track in tracksInRange:
