@@ -1,25 +1,23 @@
-# import requests
-# url = 'https://maps.googleapis.com/maps/api/elevation/json?locations=39.7391536,-104.9847034|36.455556,-116.866667&key=AIzaSyDSm_uEB6ImW4x5Az6ghGocQ977id4LYzs'
-# res = requests.get(url)
-# print(res.json())
-#
-
-from osmapi import OsmApi
-import untangle
 import xml.etree.ElementTree
+from track import Track
+e = xml.etree.ElementTree.parse("./sampleTracks.kml").getroot()
 
-e = xml.etree.ElementTree.parse("./Jerusalem.osm").getroot()
-# print(e)
-nodes = []
-ways = []
-relations = []
+paths = []
 
-for i in e.iter("node"):
-    print(i.attrib["id"])
+PREFIX = "{http://www.opengis.net/kml/2.2}"
 
-# api = OsmApi()
-# map = api.Map(31.766597, 35.174405, 31.786225, 35.212256)
 
-# obj = untangle.parse("./Jerusalem.osm")
 
-# print(obj)
+for path in e.iter(PREFIX + "coordinates"):
+    curPath = []
+    for point in path.text.strip().split(",0.0")[0:-1]:
+        latLong = point.strip().split(",")
+        curPath.append((latLong[1], latLong[0]),)
+    paths.append(curPath)
+
+for i in paths:
+    print("----------------------------")
+    t = Track(i)
+    print(t.dist)
+    print(t.maxIncline)
+    print(t.meanIncline)
