@@ -1,5 +1,6 @@
 import xml.etree.ElementTree
 from track import Track
+import track
 e = xml.etree.ElementTree.parse("./sampleTracks.kml").getroot()
 
 paths = []
@@ -15,10 +16,20 @@ for path in e.iter(PREFIX + "coordinates"):
         curPath.append((latLong[1], latLong[0]),)
     paths.append(curPath)
 
-for j, i in enumerate(paths):
+tracks = []
 
+for j, i in enumerate(paths):
     print("----------------{0}-----------------".format(j))
     t = Track(i)
     print(t.dist)
     print(t.maxIncline)
     print(t.meanIncline)
+    tracks.append(t)
+
+userPrefs = {"dist": 3.25, "facilities": True, "water": False, "incline": 2, "stairs": False}
+
+res = track.closestTracks(tracks, userPrefs)
+
+res = track.createJsonResponse(res)
+
+print(res)
