@@ -15,8 +15,9 @@ for path in e.iter(PREFIX + "coordinates"):
         curPath.append((latLong[1], latLong[0]),)
     paths.append(curPath)
 
-for i in paths:
-    print("----------------------------")
+for j, i in enumerate(paths):
+
+    print("----------------{0}-----------------".format(j))
     t = Track(i)
     print(t.dist)
     print(t.maxIncline)

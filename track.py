@@ -9,6 +9,7 @@ key = "AIzaSyDSm_uEB6ImW4x5Az6ghGocQ977id4LYzs"
 url = 'https://maps.googleapis.com/maps/api/elevation/json?locations={0},{1}|{2},{3}&key={4}'
 multurl = 'https://maps.googleapis.com/maps/api/elevation/json?locations={0}&key={1}'
 
+
 COOR = "{0},{1}"
 LAT = 0
 LONG = 1
@@ -55,11 +56,6 @@ def closestTracks(self,tracks, userPrefs):
     return closestTracks
 
 
-
-
-
-
-
 def createJsonResponse(self, tracks):
     data = {"results":[]}
     for track in tracks:
@@ -67,6 +63,27 @@ def createJsonResponse(self, tracks):
                                 'water': track.hasWater, 'stairs': track.hasStairs})
     json_data = json.dumps(data)
     return json_data
+
+
+def get_elevations(listOfCoordinates):
+
+    MAX_SIZE = 60
+    elevations = []
+
+    for i in range(len(listOfCoordinates)//(MAX_SIZE+1) + 1):
+        elevations_query = ""
+        elevations_query += COOR.format(listOfCoordinates[i*MAX_SIZE][LAT], listOfCoordinates[i*MAX_SIZE][LONG])
+
+        for coordinates in range(i*MAX_SIZE + 1, min(i*MAX_SIZE + MAX_SIZE, len(listOfCoordinates))):
+            elevations_query += "|" + COOR.format(listOfCoordinates[coordinates][LAT], listOfCoordinates[coordinates][LONG])
+
+        res = requests.get(multurl.format(elevations_query, key)).json()
+
+        for j in res["results"]:
+            elevations.append(float(j["elevation"]))
+
+    return elevations
+
 
 class Track:
     dist = 0
@@ -77,17 +94,7 @@ class Track:
     hasStairs = False
 
     def __init__(self, listOfCoordinates):
-        elevations_query = ""
-        elevations_query += COOR.format(listOfCoordinates[0][LAT], listOfCoordinates[0][LONG])
-
-        for coordinates in range(1, len(listOfCoordinates)):
-            elevations_query += "|" + COOR.format(listOfCoordinates[coordinates][LAT], listOfCoordinates[coordinates][LONG])
-
-        res = requests.get(multurl.format(elevations_query, key)).json()
-        elevations = []
-        for i in res["results"]:
-            elevations.append(float(i["elevation"]))
-
+        elevations = get_elevations(listOfCoordinates)
         for location in range(1, len(listOfCoordinates)):
             cur_dist = abs(vincenty(listOfCoordinates[location-1], listOfCoordinates[location]).km)
             self.dist += cur_dist
