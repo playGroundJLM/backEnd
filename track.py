@@ -3,6 +3,7 @@ from geopy.distance import vincenty
 import requests
 import math
 import json
+import numpy as np
 
 key = "AIzaSyDSm_uEB6ImW4x5Az6ghGocQ977id4LYzs"
 url = 'https://maps.googleapis.com/maps/api/elevation/json?locations={0},{1}|{2},{3}&key={4}'
@@ -11,13 +12,59 @@ multurl = 'https://maps.googleapis.com/maps/api/elevation/json?locations={0}&key
 COOR = "{0},{1}"
 LAT = 0
 LONG = 1
+INCLINE_EASY_OPT = 0
+INCLINE_MEDIUM_OPT = 3
+INCLINE_HARD_OPT = 6
+
+def closestTracks(self,tracks, userPrefs):
+    tracksInRange = []
+    for track in tracks:
+        if (track.dist <= userPrefs['dist']+500) and (track.dist >= userPrefs['dist']-500):
+            tracksInRange.append(track)
+    grades = []
+    for track in tracksInRange:
+        grade = 0
+        if 0 <= userPrefs['incline'] < 3:
+            grade = abs(track - INCLINE_EASY_OPT)
+        if 3 <= userPrefs['incline'] < 6:
+            grade = abs(track - INCLINE_MEDIUM_OPT)
+        if 6 <= userPrefs['incline'] <= 12:
+            grade = abs(track - INCLINE_HARD_OPT)
+        if userPrefs['facilities']:
+            if track.hasFacilities:
+                grade -= 2
+            else:
+                grade += 2
+        if userPrefs['water']:
+            if track.hasWater:
+                grade -= 2
+            else:
+                grade += 2
+        if userPrefs['stairs']:
+            if track.hasStairs:
+                grade -= 2
+            else:
+                grade += 2
+        grades.append(grade)
+    closestTracks = []
+    for i in range(3):
+        minIndex = np.argmin(grades)
+        del grades[minIndex]
+        closestTracks.append(tracksInRange[minIndex])
+        del tracksInRange[minIndex]
+    return closestTracks
+
+
+
+
+
 
 
 def createJsonResponse(self, tracks):
     data = {"results":[]}
     for track in tracks:
-        data['results'].append({'dist': track.dist, 'Facilities': track.Facilities,
-                                'Water': track.hasWater, 'Stairs': track.hasStairs})
+        data['results'].append({'incline': track.incline, 'dist': track.dist, 'facilities': track.Facilities,
+                                'water': track.hasWater, 'stairs': track.hasStairs})
     json_data = json.dumps(data)
     return json_data
 
