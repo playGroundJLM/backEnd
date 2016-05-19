@@ -5,9 +5,9 @@ import track
 import pickle
 
 if __name__ == "__main__":
+    tracks = []
     if sys.argv[1] == "write":
         e = xml.etree.ElementTree.parse("./sampleTracks.kml").getroot()
-
         paths = []
 
         PREFIX = "{http://www.opengis.net/kml/2.2}"
@@ -19,8 +19,6 @@ if __name__ == "__main__":
                 curPath.append((latLong[1], latLong[0]),)
             paths.append(curPath)
 
-        tracks = []
-
         for j, i in enumerate(paths):
             print("----------------{0}-----------------".format(j))
             t = Track(i)
@@ -29,19 +27,22 @@ if __name__ == "__main__":
             print(t.meanIncline)
             tracks.append(t)
 
-        userPrefs = {"dist": 3.25, "facilities": True, "water": False, "incline": 3, "stairs": False, 'lat':31.783029, 'long': 35.210880}
-
-        res = track.closestTracks(tracks, userPrefs)
-
-        res = track.createJsonResponse(res)
-        print(res)
-        with open("./resPickle.pickle", 'wb') as f:
-            pickle.dump(res, f)
+        with open("./tracks.pickle", 'wb') as f:
+            pickle.dump(tracks, f)
 
     elif sys.argv[1] == "read":
-        with open("./resPickle.pickle", "rb") as f:
-            res = pickle.load(f)
-        print(res)
-
+        with open("./tracks.pickle", "rb") as f:
+            tracks = pickle.load(f)
     else:
         print("wrong args")
+        exit(0)
+
+    userPrefs = {"dist": 3.25, "facilities": True, "water": False, "incline": 3, "stairs": False, 'lat': 31.783029,
+                 'long': 35.210880}
+
+    res = track.closestTracks(tracks, userPrefs)
+
+    res = track.createJsonResponse(res)
+    print(res)
+    with open("./resPickle.pickle", 'wb') as f:
+        pickle.dump(res, f)
