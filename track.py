@@ -2,6 +2,8 @@
 from geopy.distance import vincenty
 import requests
 import math
+import json
+
 key = "AIzaSyDSm_uEB6ImW4x5Az6ghGocQ977id4LYzs"
 url = 'https://maps.googleapis.com/maps/api/elevation/json?locations={0},{1}|{2},{3}&key={4}'
 multurl = 'https://maps.googleapis.com/maps/api/elevation/json?locations={0}&key={1}'
@@ -9,6 +11,15 @@ multurl = 'https://maps.googleapis.com/maps/api/elevation/json?locations={0}&key
 COOR = "{0},{1}"
 LAT = 0
 LONG = 1
+
+
+def createJsonResponse(self, tracks):
+    data = {"results":[]}
+    for track in tracks:
+        data['results'].append({'dist': track.dist, 'Facilities': track.Facilities,
+                                'Water': track.hasWater, 'Stairs': track.hasStairs})
+    json_data = json.dumps(data)
+    return json_data
 
 class Track:
     dist = 0
