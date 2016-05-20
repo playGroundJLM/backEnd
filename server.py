@@ -23,9 +23,9 @@ class GetResults(tornado.web.RequestHandler):
         body = bytes.decode(self.request.body)
         print(body)
         body = json.loads(body)
-        curReq = {"dist": float(body["dist"]), "facilities": body["facilities"].lower() == "true",
-                  "water": body["water"].lower() == "true", "incline": int(body["incline"]),
-                  "stairs": body["stairs"].lower() == "true", 'lat': float(body["lat"]), 'long': float(body["long"])}
+        curReq = {"dist": float(body["dist"]), "facilities": body["facilities"],
+                  "water": body["water"], "incline": int(body["incline"]),
+                  "stairs": body["stairs"], 'lat': float(body["lat"]), 'long': float(body["long"])}
         tracks = createGraph.read_tracks()
         res = createGraph.results(tracks, curReq)
         self.finish(res)
