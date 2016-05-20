@@ -22,6 +22,7 @@ def closestTracks(tracks, userPrefs):
     tracksInRange = []
     print("tracks: " + str(len(tracks)))
     for track in tracks:
+        print(track.dist)
         if (track.dist <= userPrefs['dist']+LENGTH_FLEXIBILITY) and (track.dist >= userPrefs['dist']-LENGTH_FLEXIBILITY):
             tracksInRange.append(track)
     grades = []
