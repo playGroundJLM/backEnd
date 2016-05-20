@@ -24,6 +24,7 @@ def closestTracks(tracks, userPrefs):
         if (track.dist <= userPrefs['dist']+LENGTH_FLEXIBILITY) and (track.dist >= userPrefs['dist']-LENGTH_FLEXIBILITY):
             tracksInRange.append(track)
     grades = []
+    print("tracks in range: " + str(len(tracksInRange)))
     for track in tracksInRange:
         grade = 0
         if userPrefs['incline'] == 1:
