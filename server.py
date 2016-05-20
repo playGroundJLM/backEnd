@@ -1,7 +1,9 @@
+import json
 import pickle
 import tornado.ioloop
 import tornado.web
 import os
+import createGraph
 from platform import system
 
 class MainHandler(tornado.web.RequestHandler):
@@ -13,6 +15,20 @@ class GetTrack(tornado.web.RequestHandler):
     def get(self):
         print("test.html")
         self.finish()
+
+
+class GetResults(tornado.web.RequestHandler):
+    def post(self):
+        print("results")
+        body = bytes.decode(self.request.body)
+        print(body)
+        body = json.loads(body)
+        curReq = {"dist": float(body["dist"]), "facilities": body["facilities"].lower() == "true",
+                  "water": body["water"].lower() == "true", "incline": int(body["incline"]),
+                  "stairs": body["stairs"].lower() == "true", 'lat': float(body["lat"]), 'long': float(body["long"])}
+        tracks = createGraph.read_tracks()
+        res = createGraph.results(tracks, curReq)
+        self.finish(res)
 
 class GetTestTracks(tornado.web.RequestHandler):
     def get(self):
@@ -33,6 +49,7 @@ def make_app():
         (r"/", MainHandler),
         (r"/track", GetTrack),
         (r"/test", GetTestTracks),
+        (r"/tracks", GetResults),
     ], **settings)
 
 

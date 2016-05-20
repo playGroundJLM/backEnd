@@ -6,7 +6,7 @@
 		<Folder>
 			<name>tracks</name>
 			<Placemark>
-				<name>track0</name>
+				<name>fw</name>
 				<styleUrl>#poly-000000-1-77-nodesc</styleUrl>
 				<Polygon>
 					<outerBoundaryIs>
@@ -18,7 +18,7 @@
 				</Polygon>
 			</Placemark>
 			<Placemark>
-				<name>track1</name>
+				<name>fw</name>
 				<styleUrl>#poly-000000-1-77-nodesc</styleUrl>
 				<Polygon>
 					<outerBoundaryIs>
@@ -30,7 +30,7 @@
 				</Polygon>
 			</Placemark>
 			<Placemark>
-				<name>track2</name>
+				<name>fw</name>
 				<styleUrl>#poly-000000-1-77-nodesc</styleUrl>
 				<Polygon>
 					<outerBoundaryIs>
@@ -42,7 +42,7 @@
 				</Polygon>
 			</Placemark>
 			<Placemark>
-				<name>track3</name>
+				<name>fw</name>
 				<styleUrl>#poly-000000-1-77-nodesc</styleUrl>
 				<Polygon>
 					<outerBoundaryIs>
@@ -66,7 +66,7 @@
 				</Polygon>
 			</Placemark>
 			<Placemark>
-				<name>מצולע 6</name>
+				<name>fw</name>
 				<styleUrl>#poly-000000-1-77-nodesc</styleUrl>
 				<Polygon>
 					<outerBoundaryIs>
@@ -78,7 +78,7 @@
 				</Polygon>
 			</Placemark>
 			<Placemark>
-				<name>מצולע 7</name>
+				<name>fw</name>
 				<styleUrl>#poly-000000-1-77-nodesc</styleUrl>
 				<Polygon>
 					<outerBoundaryIs>
@@ -90,7 +90,7 @@
 				</Polygon>
 			</Placemark>
 			<Placemark>
-				<name>מצולע 8</name>
+				<name>fw</name>
 				<styleUrl>#poly-000000-1-77-nodesc</styleUrl>
 				<Polygon>
 					<outerBoundaryIs>
@@ -102,7 +102,7 @@
 				</Polygon>
 			</Placemark>
 			<Placemark>
-				<name>מצולע 8</name>
+				<name>fw</name>
 				<styleUrl>#poly-000000-1-77-nodesc</styleUrl>
 				<Polygon>
 					<outerBoundaryIs>
@@ -114,7 +114,7 @@
 				</Polygon>
 			</Placemark>
 			<Placemark>
-				<name>מצולע 9</name>
+				<name>w</name>
 				<styleUrl>#poly-000000-1-77-nodesc</styleUrl>
 				<Polygon>
 					<outerBoundaryIs>
@@ -126,7 +126,7 @@
 				</Polygon>
 			</Placemark>
 			<Placemark>
-				<name>מצולע 10</name>
+				<name>fsw</name>
 				<styleUrl>#poly-000000-1-77-nodesc</styleUrl>
 				<Polygon>
 					<outerBoundaryIs>
@@ -138,7 +138,7 @@
 				</Polygon>
 			</Placemark>
 			<Placemark>
-				<name>מצולע 11</name>
+				<name>fw</name>
 				<styleUrl>#poly-000000-1-77-nodesc</styleUrl>
 				<Polygon>
 					<outerBoundaryIs>
@@ -150,7 +150,7 @@
 				</Polygon>
 			</Placemark>
 			<Placemark>
-				<name>מצולע 13</name>
+				<name>fw</name>
 				<styleUrl>#poly-000000-1-77-nodesc</styleUrl>
 				<Polygon>
 					<outerBoundaryIs>
@@ -162,7 +162,7 @@
 				</Polygon>
 			</Placemark>
 			<Placemark>
-				<name>מצולע 15</name>
+				<name>fw</name>
 				<styleUrl>#poly-000000-1-77-nodesc</styleUrl>
 				<Polygon>
 					<outerBoundaryIs>
@@ -198,7 +198,7 @@
 				</Polygon>
 			</Placemark>
 			<Placemark>
-				<name>מצולע 18</name>
+				<name>fw</name>
 				<styleUrl>#poly-000000-1-77-nodesc</styleUrl>
 				<Polygon>
 					<outerBoundaryIs>
@@ -210,7 +210,7 @@
 				</Polygon>
 			</Placemark>
 			<Placemark>
-				<name>מצולע 20</name>
+				<name>s</name>
 				<styleUrl>#poly-000000-1-77-nodesc</styleUrl>
 				<Polygon>
 					<outerBoundaryIs>
@@ -242,7 +242,7 @@
 				</Polygon>
 			</Placemark>
 			<Placemark>
-				<name>מצולע 22</name>
+				<name>fw</name>
 				<styleUrl>#poly-000000-1-77-nodesc</styleUrl>
 				<Polygon>
 					<outerBoundaryIs>
@@ -266,7 +266,7 @@
 				</Polygon>
 			</Placemark>
 			<Placemark>
-				<name>מצולע 22</name>
+				<name>s</name>
 				<styleUrl>#poly-000000-1-77-nodesc</styleUrl>
 				<Polygon>
 					<outerBoundaryIs>
@@ -278,13 +278,13 @@
 				</Polygon>
 			</Placemark>
 			<Placemark>
-				<name>מצולע 23</name>
+				<name>fsw</name>
 				<styleUrl>#poly-000000-1-77-nodesc</styleUrl>
 				<Polygon>
 					<outerBoundaryIs>
 						<LinearRing>
 							<tessellate>1</tessellate>
-							<coordinates>35.2103662,31.774303,0.0 35.2129197,31.7744216,0.0 35.2140677,31.7745128,0.0 35.2163744,31.7748411,0.0 35.2177906,31.7752972,0.0 35.2202582,31.7769389,0.0 35.2220392,31.7778692,0.0 35.2214813,31.7789272,0.0 35.2212238,31.7787995,0.0 35.221138,31.7790366,0.0 35.2212024,31.7792373,0.0 35.2198505,31.779748,0.0 35.2182198,31.7802223,0.0 35.2159238,31.7804959,0.0 35.215323,31.7804959,0.0 35.2147007,31.7808789,0.0 35.2138209,31.7808242,0.0 35.2119756,31.7813532,0.0 35.2123618,31.7791734,0.0 35.2124691,31.7782158,0.0 35.2105701,31.7781063,0.0 35.2106023,31.7768477,0.0 35.210495,31.7748229,0.0 35.210216,31.774531,0.0 35.2103662,31.774303,0.0</coordinates>
+							<coordinates>35.2103635,31.774303,0.0 35.212917,31.7744216,0.0 35.214065,31.7745128,0.0 35.2163717,31.7748411,0.0 35.2177879,31.7752972,0.0 35.2202555,31.7769389,0.0 35.2220365,31.7778692,0.0 35.2214786,31.7789272,0.0 35.2212211,31.7787995,0.0 35.2211353,31.7790366,0.0 35.2211997,31.7792373,0.0 35.2198478,31.779748,0.0 35.2182171,31.7802223,0.0 35.2159211,31.7804959,0.0 35.2153203,31.7804959,0.0 35.214698,31.7808789,0.0 35.2138182,31.7808242,0.0 35.2119729,31.7813532,0.0 35.2123591,31.7791734,0.0 35.2124664,31.7782158,0.0 35.2105674,31.7781063,0.0 35.2105996,31.7768477,0.0 35.2104923,31.7748229,0.0 35.2102133,31.774531,0.0 35.2103635,31.774303,0.0</coordinates>
 						</LinearRing>
 					</outerBoundaryIs>
 				</Polygon>
@@ -322,7 +322,7 @@
 				</Polygon>
 			</Placemark>
 			<Placemark>
-				<name>מצולע 28</name>
+				<name>fw</name>
 				<styleUrl>#poly-000000-1-77-nodesc</styleUrl>
 				<Polygon>
 					<outerBoundaryIs>
@@ -334,7 +334,7 @@
 				</Polygon>
 			</Placemark>
 			<Placemark>
-				<name>מצולע 29</name>
+				<name>fw</name>
 				<styleUrl>#poly-000000-1-77-nodesc</styleUrl>
 				<Polygon>
 					<outerBoundaryIs>
@@ -346,7 +346,7 @@
 				</Polygon>
 			</Placemark>
 			<Placemark>
-				<name>מצולע 31</name>
+				<name>w</name>
 				<styleUrl>#poly-000000-1-77-nodesc</styleUrl>
 				<Polygon>
 					<outerBoundaryIs>
