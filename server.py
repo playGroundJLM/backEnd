@@ -28,7 +28,6 @@ class GetResults(tornado.web.RequestHandler):
                   "stairs": body["stairs"], 'lat': float(body["lat"]), 'long': float(body["long"])}
         tracks = createGraph.read_tracks()
         res = createGraph.results(tracks, curReq)
-        res = json.dumps(res)
         print(res)
         self.finish(res)
 
