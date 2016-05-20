@@ -37,7 +37,7 @@ if __name__ == "__main__":
         print("wrong args")
         exit(0)
 
-    userPrefs = {"dist": 3.25, "facilities": True, "water": False, "incline": 3, "stairs": False, 'lat': 31.783029,
+    userPrefs = {"dist": 3, "facilities": True, "water": False, "incline": 1, "stairs": False, 'lat': 31.783029,
                  'long': 35.210880}
 
     res = track.closestTracks(tracks, userPrefs)

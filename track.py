@@ -16,11 +16,12 @@ LONG = 1
 INCLINE_EASY_OPT = 0
 INCLINE_MEDIUM_OPT = 7.5
 INCLINE_HARD_OPT = 10
+LENGTH_FLEXIBILITY = 0.75
 
 def closestTracks(tracks, userPrefs):
     tracksInRange = []
     for track in tracks:
-        if (track.dist <= userPrefs['dist']+0.5) and (track.dist >= userPrefs['dist']-0.5):
+        if (track.dist <= userPrefs['dist']+LENGTH_FLEXIBILITY) and (track.dist >= userPrefs['dist']-LENGTH_FLEXIBILITY):
             tracksInRange.append(track)
     grades = []
     for track in tracksInRange:
@@ -46,20 +47,29 @@ def closestTracks(tracks, userPrefs):
                 grade -= 2
             else:
                 grade += 2
-        minDistance = 10
+        minDistance = math.inf
         for point in track.points:
             cur_dist = abs(vincenty(point, (userPrefs['lat'],userPrefs['long'])).km)
             if (cur_dist < minDistance):
                 minDistance = cur_dist
+                track.closestPoint = point
         grade += math.sqrt(minDistance)
         grades.append(grade)
-    closestTracks = []
+    nearestTracks = []
     for i in range(3):
         minIndex = np.argmin(grades)
         del grades[minIndex]
-        closestTracks.append(tracksInRange[minIndex])
+        nearestTracks.append(tracksInRange[minIndex])
         del tracksInRange[minIndex]
-    return closestTracks
+        curPoints = nearestTracks[i].points[0:-1]
+        while curPoints[0] != nearestTracks[i].closestPoint:
+            temp = curPoints[0]
+            for j in range(1, len(curPoints)):
+                curPoints[j-1] = curPoints[j]
+            curPoints[len(curPoints)-1] = temp
+        curPoints.append(curPoints[0])
+        nearestTracks[i].points = curPoints
+    return nearestTracks
 
 
 def createJsonResponse(tracks):
@@ -73,7 +83,7 @@ def createJsonResponse(tracks):
         else:
             inc = 3
         data['results'].append({'incline': inc, 'dist': track.dist, 'facilities': track.hasFacilities,
-                                'water': track.hasWater, 'stairs': track.hasStairs})
+                                'water': track.hasWater, 'stairs': track.hasStairs, 'points': track.points})
     json_data = json.dumps(data)
     return json_data
 
@@ -99,12 +109,14 @@ def get_elevations(listOfCoordinates):
 
 
 class Track:
+    closestPoint = (0, 0)
     dist = 0
     maxIncline = 0
     meanIncline = 0
     hasFacilities = False
     hasWater = False
     hasStairs = False
+    points = []
 
     def __init__(self, listOfCoordinates):
         self.points = listOfCoordinates
