@@ -16,7 +16,7 @@ LONG = 1
 INCLINE_EASY_OPT = 0
 INCLINE_MEDIUM_OPT = 7.5
 INCLINE_HARD_OPT = 10
-LENGTH_FLEXIBILITY = 0.75
+LENGTH_FLEXIBILITY = 1
 
 def closestTracks(tracks, userPrefs):
     tracksInRange = []
